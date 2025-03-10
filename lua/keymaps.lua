@@ -21,6 +21,12 @@ Keymaps = {
 
 		{ "K", vim.lsp.buf.hover, desc = "Show hover" },
 		-- { "gd", vim.lsp.buf.definition, desc = "Jump to definition" },
+		-- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
+
+		{ "<leader>bs", '<cmd>write<cr>', desc = 'Save Buffer' },
+		{ "<leader>ba", '<cmd>wall<cr>', desc = 'Save all Buffers' },
+	},
+	tiny_code_action = {
 		{
 			"<leader>ca",
 			function()
@@ -32,10 +38,14 @@ Keymaps = {
 	},
 	snacks = {
 		-- { '', function () Snacks.picker.() end, desc = '' },
-		{ '<leader>b/', function () Snacks.picker.buffer() end, desc = 'Find Buffer' },
+		{ '<leader>bg', function () Snacks.picker.lines() end, desc = 'Find in Buffer' },
+		{ '<leader>bG', function () Snacks.picker.grep_buffers() end, desc = 'Find among Buffers' },
+		{ '<leader>b/', function () Snacks.picker.buffers() end, desc = 'Find Buffer' },
 
 		{ '<leader>ff', function () Snacks.picker.files() end, desc = 'Find Files' },
 		{ '<leader>fg', function () Snacks.picker.grep() end, desc = 'Grep in Files' },
+		{ '<leader>fp', function () Snacks.picker.projects() end, desc = 'Projects' },
+		{ '<leader>fr', function () Snacks.picker.recent() end, desc = 'Recent' },
 		{ '<leader>f:', function () Snacks.picker.commands() end, desc = 'Find Command' },
 
 		{ '<leader>cdt', function () Snacks.picker.diagnostics() end, desc = 'Diagnostics List' },
@@ -55,12 +65,32 @@ Keymaps = {
 		{ '<leader>tZ', function () Snacks.toggle.zen() end, desc = 'Zen' },
 
 		{ '<leader>go', function () Snacks.lazygit.open() end, desc = 'Open LazyGit' },
+		{ '<leader>gb', function () Snacks.picker.git_branches() end, desc = 'Switch branch' },
+		{ '<leader>gd', function () Snacks.picker.git_diff() end, desc = 'Git Diff' },
+		{ '<leader>gl', function () Snacks.picker.git_log() end, desc = 'Git Log' },
+		{ '<leader>gL', function () Snacks.picker.git_log_file() end, desc = 'Git Log File' },
+		{ '<leader>g<c-l>', function () Snacks.picker.git_log_line() end, desc = 'Git Log Line' },
+		{ '<leader>gs', function () Snacks.picker.git_status() end, desc = 'Git Status' },
+		{ '<leader>gS', function () Snacks.picker.git_stash() end, desc = 'Git Stash' },
+
+		{ '<leader>\'c', function () Snacks.notifier.hide() end, desc = 'Clear Notifications' },
+		{ '<leader>\'h', function () Snacks.notifier.show_history() end, desc = 'Show Notification History' },
+		{ '<leader>\'s', function () Snacks.picker.notifications() end, desc = 'Show Notification History Picker' },
+
+		{ '<leader>;h', function () Snacks.notifier.help() end, desc = 'Show Help' },
+		{ '<leader>;r', function () Snacks.notifier.register() end, desc = 'Show Registers' },
+		{ '<leader>;k', function () Snacks.notifier.keymaps() end, desc = 'Show Keymaps' },
+		{ '<leader>;m', function () Snacks.picker.man() end, desc = 'Search Man Pages' },
+		{ '<leader>;u', function () Snacks.picker.undo() end, desc = 'Search Undo' },
+		{ '<leader>;/', function () Snacks.picker() end, desc = 'Search snacks pickers' },
+		{ '<leader>.o', function () Snacks.scratch.open() end, desc = 'Scratch buffer open' },
+		{ '<leader>.s', function () Snacks.scratch.select() end, desc = 'Scratch buffer select' },
 	}
 }
 
 local function compress(m, t)
 	for _, keymap in ipairs(t) do
-		modes = keymap.mode or { 'n' }
+		local modes = keymap.mode or { 'n' }
 		for _, mode in ipairs(modes) do
 			local out = {}
 			local opts = {}
@@ -82,7 +112,10 @@ end
 
 for k, v in pairs(Keymaps) do
 	local keys = {}
-	if k == 'basic' or k == 'snacks' then
+	if     k == 'basic'
+		-- or k == 'tiny_code_action'
+		-- or k == 'snacks'
+	then
 		compress(keys, v)
 	end
 

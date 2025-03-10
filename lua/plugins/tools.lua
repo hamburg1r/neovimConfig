@@ -116,6 +116,7 @@ return {
 			{ "nvim-telescope/telescope.nvim" },
 		},
 		event = "LspAttach",
+		keys = Keymaps.tiny_code_action,
 		opt = {
 			--- The backend to use, currently only "vim", "delta" and "difftastic" are supported
 			backend = "vim",

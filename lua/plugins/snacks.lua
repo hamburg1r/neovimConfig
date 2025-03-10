@@ -38,18 +38,44 @@ return {
 			},
 			picker = {
 				enabled = true,
-				-- sources = {
-				-- 	explorer = {
-				-- 		layout = {
-				-- 			width = 60
-				-- 		},
-				-- 	},
-				-- },
+				layout = {
+					cycle = true,
+					preset = function()
+						return vim.o.columns >= 120 and "default" or "dropdown"
+					end,
+				},
+				sources = {
+					explorer = {
+						layout = {
+							layout = {
+								width = 30,
+							},
+						},
+					},
+				},
+				win = {
+					input = {
+						keys = {
+							["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+							["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+							["<c-f>"] = { "list_scroll_down", mode = { "i", "n" } },
+							["<c-b>"] = { "list_scroll_up", mode = { "i", "n" } },
+						},
+					},
+				},
 			},
 			quickfile = { enabled = true },
 			scope = { enabled = true },
+			scratch = {
+				enabled = true,
+			},
 			scroll = { enabled = false },
-			statuscolumn = { enabled = true },
+			statuscolumn = {
+				enabled = true,
+				-- folds = {
+				-- 	open = true,
+				-- },
+			},
 			words = { enabled = true },
 			styles = {
 				notification = {
@@ -70,19 +96,6 @@ return {
 						Snacks.debug.backtrace()
 					end
 					vim.print = _G.dd -- Override print to use snacks for `:=` command
-
-					-- Create some toggle mappings
-					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-					Snacks.toggle.diagnostics():map("<leader>ud")
-					Snacks.toggle.line_number():map("<leader>ul")
-					Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
-					Snacks.toggle.treesitter():map("<leader>uT")
-					Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-					Snacks.toggle.inlay_hints():map("<leader>uh")
-					Snacks.toggle.indent():map("<leader>ug")
-					Snacks.toggle.dim():map("<leader>uD")
 				end,
 			})
 		end,
