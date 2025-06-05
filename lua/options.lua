@@ -68,7 +68,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 15
 
 vim.g.python_recommended_style = false
@@ -104,7 +104,10 @@ vim.opt.wrap = true -- use :set wrap! to disable wrap
 -- Set the commands to save in history default number is 20.;
 -- vim.opt.history = 1000;
 -- Disables fold at startup;
--- vim.opt.foldenable = false;
+vim.opt.foldenable = false;
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
 vim.opt.termguicolors = true
 
 -- Swap files folder;

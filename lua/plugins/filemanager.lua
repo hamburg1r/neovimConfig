@@ -12,6 +12,6 @@ return {
 	-- 		"NvimTreeFindFile",
 	-- 	},
 	-- 	config = true,
-	-- 	-- opt = {},
+	-- 	-- opts = {},
 	-- },
 }

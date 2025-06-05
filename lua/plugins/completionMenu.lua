@@ -26,6 +26,7 @@ return {
 			--
 			-- See the full "keymap" documentation for information on defining your own keymap.
 			keymap = {
+				preset = 'none',
 				['<C-a>'] = { 'show', 'show_documentation', 'hide_documentation' },
 				['<C-c>'] = { 'hide', 'fallback' },
 				['<C-y>'] = { 'select_and_accept' },
@@ -33,8 +34,8 @@ return {
 				['<C-p>'] = { 'select_prev', 'snippet_backward', 'fallback_to_mappings' },
 				['<C-n>'] = { 'select_next', 'snippet_forward', 'fallback_to_mappings' },
 
-				['<C-d>'] = { 'scroll_documentation_up', 'fallback' },
-				['<C-u>'] = { 'scroll_documentation_down', 'fallback' },
+				['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+				['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
 
 				['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
 			},

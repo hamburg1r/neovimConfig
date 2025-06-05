@@ -52,6 +52,10 @@ return {
 							},
 						},
 					},
+					projects = {
+						dev = { '~/repo' },
+						patterns = { '.git', 'package.json', 'pubspec.yaml', 'flake.nix' }
+					}
 				},
 				win = {
 					input = {
