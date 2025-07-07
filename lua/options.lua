@@ -121,3 +121,5 @@ vim.opt.confirm = true
 
 -- Global status bar
 vim.opt.laststatus = 3
+
+vim.opt.winborder = 'rounded'

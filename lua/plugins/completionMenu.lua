@@ -51,7 +51,7 @@ return {
 				},
 				accept = {
 					auto_brackets = {
-						enabled = false,
+						enabled = true,
 					},
 					dot_repeat = true,
 					create_undo_point = true,
@@ -75,6 +75,9 @@ return {
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 250,
+					window = {
+						border = 'rounded',
+					},
 				},
 			},
 

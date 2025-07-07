@@ -207,6 +207,7 @@ return {
 				-- }
 			}
 			require 'lspconfig'.ts_ls.setup {}
+			require 'lspconfig'.ccls.setup {}
 			-- require('lspconfig').dartls.setup{}
 		end,
 		-- config = function()
