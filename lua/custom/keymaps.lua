@@ -1,4 +1,4 @@
-Keymaps = {
+local keymaps = {
 	basic = {
 		-- [[ Basic Keymaps ]]
 		--  See `:help vim.keymap.set()`
@@ -30,11 +30,19 @@ Keymaps = {
 
 		{ "<leader>cdf", vim.diagnostic.open_float,             desc = 'Open Diagnostics in Float' },
 	},
+	custom = {
+		{
+			'<leader>\'u',
+			function() CUSTOM.CustomFunctions.unicode_converter() end,
+			mode = { "n", "v" },
+			desc = 'Convert unicode to character'
+		},
+	},
 	ssr = {
 		{
 			"<leader>cR",
 			function() require("ssr").open() end,
-			mode = { "n", "x" },
+			mode = { "n", "x", "v" },
 			desc = "Structural search and replace",
 		},
 	},
@@ -177,6 +185,32 @@ Keymaps = {
 			desc = "Select hunk (text object)"
 		}
 	},
+	git_conflict = {
+		{
+			'<leader>gco',
+			'<Plug>(git-conflict-ours)',
+		},
+		{
+			'<leader>gct',
+			'<Plug>(git-conflict-theirs)',
+		},
+		{
+			'<leader>gcb',
+			'<Plug>(git-conflict-both)',
+		},
+		{
+			'<leader>gc0',
+			'<Plug>(git-conflict-none)',
+		},
+		{
+			'[x',
+			'<Plug>(git-conflict-prev-conflict)',
+		},
+		{
+			']x',
+			'<Plug>(git-conflict-next-conflict)',
+		},
+	},
 	tiny_code_action = {
 		{
 			"<leader>ca",
@@ -186,6 +220,22 @@ Keymaps = {
 			noremap = true,
 			silent = true,
 			desc = "Code Action"
+		},
+	},
+	flutter_bloc = {
+		{
+			"<leader>cfb",
+			function()
+				require('flutter-bloc').create_bloc()
+			end,
+			desc = '[C]reate [F]lutter [B]loc',
+		},
+		{
+			"<leader>cfc",
+			function()
+				require('flutter-bloc').create_cubit()
+			end,
+			desc = '[C]reate [F]lutter [C]ubit',
 		},
 	},
 	dap = {
@@ -305,40 +355,4 @@ Keymaps = {
 	}
 }
 
-local function compress(m, t)
-	for _, keymap in ipairs(t) do
-		local modes = keymap.mode or { 'n' }
-		for _, mode in ipairs(modes) do
-			local out = {}
-			local opts = {}
-			out[1] = mode
-			out[2] = keymap[1]
-			out[3] = keymap[2]
-			for k, v in pairs(keymap) do
-				if k ~= 'mode' and type(k) ~= 'number' then
-					opts[k] = v
-				end
-			end
-			if opts ~= {} then
-				out[4] = opts
-			end
-			table.insert(m, out)
-		end
-	end
-end
-
-for k, v in pairs(Keymaps) do
-	local keys = {}
-	if k == 'basic'
-	-- or k == 'ssr'
-	-- or k == 'dap'
-	-- or k == 'tiny_code_action'
-	-- or k == 'snacks'
-	then
-		compress(keys, v)
-	end
-
-	for t, key in pairs(keys) do
-		vim.keymap.set(key[1], key[2], key[3], key[4])
-	end
-end
+return keymaps

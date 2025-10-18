@@ -1,3 +1,5 @@
+local Keymaps = CUSTOM.keymaps
+
 return {
 	-- Alternatively, use `config = function() ... end` for full control over the configuration.
 	-- If you prefer to call `setup` explicitly, use:

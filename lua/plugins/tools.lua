@@ -1,3 +1,5 @@
+local Keymaps = CUSTOM.keymaps
+
 return {
 	{
 		'nvim-flutter/flutter-tools.nvim',

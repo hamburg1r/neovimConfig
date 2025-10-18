@@ -84,9 +84,12 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+CUSTOM = require('custom.default')
+
 require('options')
-require('keymaps')
 require('autocommands')
+
+CUSTOM.CustomFunctions.setup_keymap(CUSTOM.keymaps)
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
