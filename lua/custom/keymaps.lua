@@ -19,16 +19,34 @@ local keymaps = {
 		-- or just use <C-\><C-n> to exit terminal mode
 		{ '<Esc><Esc>',  '<C-\\><C-n>',                         desc = 'Exit terminal mode',       mode = { 't' } },
 
-		{ "K",           vim.lsp.buf.hover,                     desc = "Show hover" },
+		-- { "K",           vim.lsp.buf.hover,                     desc = "Show hover" },
 		-- { "gd", vim.lsp.buf.definition, desc = "Jump to definition" },
 		-- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
 
 		{ "<leader>bs",  '<cmd>write<cr>',                      desc = 'Save Buffer' },
 		{ "<leader>ba",  '<cmd>wall<cr>',                       desc = 'Save all Buffers' },
+		{ "<leader>by",  '<cmd>%y *<cr>',                       desc = 'Yank buffer to clipboard' },
 
 		{ "<leader>;f",  '<cmd>Telescope flutter commands<cr>', desc = 'Open Flutter Commands' },
 
 		{ "<leader>cdf", vim.diagnostic.open_float,             desc = 'Open Diagnostics in Float' },
+	},
+	lsp = {
+		-- { 'gd', require('telescope.builtin').lsp_definitions, desc = '[G]oto [D]efinition' },
+		-- { 'gr', require('telescope.builtin').lsp_references, desc = '[G]oto [R]eferences' },
+		-- { 'gI', require('telescope.builtin').lsp_implementations, desc = '[G]oto [I]mplementation' },
+		-- { '<leader>D', require('telescope.builtin').lsp_type_definitions, desc = 'Type [D]efinition' },
+		-- { '<leader>ds', require('telescope.builtin').lsp_document_symbols, desc = '[D]ocument [S]ymbols' },
+		-- { '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, desc = '[W]orkspace [S]ymbols' },
+		-- { '<leader>rn', vim.lsp.buf.rename, desc = '[R]e[n]ame' },
+		-- { 'gD', vim.lsp.buf.declaration, desc = '[G]oto [D]eclaration' },
+		-- { 'K', vim.lsp.buf.hover, desc = 'Show hover' },
+		-- {
+		-- 	'<leader>th',
+		-- 	function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = vim.api.nvim_get_current_buf() }) end,
+		-- 	desc = '[T]oggle Inlay [H]ints',
+		-- 	condition = function(client, bufnr) return client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, { bufnr = bufnr }) end
+		-- },
 	},
 	custom = {
 		{
@@ -352,6 +370,9 @@ local keymaps = {
 		{ '<leader>;/',     function() Snacks.picker() end,                desc = 'Search snacks pickers' },
 		{ '<leader>.o',     function() Snacks.scratch.open() end,          desc = 'Scratch buffer open' },
 		{ '<leader>.s',     function() Snacks.scratch.select() end,        desc = 'Scratch buffer select' },
+		{ '<leader>bdd',    function() Snacks.bufdelete.delete() end,      desc = 'Delete current buffer' },
+		{ '<leader>bda',    function() Snacks.bufdelete.all() end,         desc = 'Delete all buffers' },
+		{ '<leader>bdo',    function() Snacks.bufdelete.other() end,        desc = 'Delete other buffers' },
 	}
 }
 
