@@ -32,21 +32,20 @@ local keymaps = {
 		{ "<leader>cdf", vim.diagnostic.open_float,             desc = 'Open Diagnostics in Float' },
 	},
 	lsp = {
-		-- { 'gd', require('telescope.builtin').lsp_definitions, desc = '[G]oto [D]efinition' },
-		-- { 'gr', require('telescope.builtin').lsp_references, desc = '[G]oto [R]eferences' },
-		-- { 'gI', require('telescope.builtin').lsp_implementations, desc = '[G]oto [I]mplementation' },
-		-- { '<leader>D', require('telescope.builtin').lsp_type_definitions, desc = 'Type [D]efinition' },
-		-- { '<leader>ds', require('telescope.builtin').lsp_document_symbols, desc = '[D]ocument [S]ymbols' },
-		-- { '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, desc = '[W]orkspace [S]ymbols' },
-		-- { '<leader>rn', vim.lsp.buf.rename, desc = '[R]e[n]ame' },
-		-- { 'gD', vim.lsp.buf.declaration, desc = '[G]oto [D]eclaration' },
-		-- { 'K', vim.lsp.buf.hover, desc = 'Show hover' },
-		-- {
-		-- 	'<leader>th',
-		-- 	function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = vim.api.nvim_get_current_buf() }) end,
-		-- 	desc = '[T]oggle Inlay [H]ints',
-		-- 	condition = function(client, bufnr) return client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, { bufnr = bufnr }) end
-		-- },
+		{ 'gd', function() Snacks.picker.lsp_definitions() end, desc = '[G]oto [D]efinition' },
+		{ 'gr', function() Snacks.picker.lsp_references() end, desc = '[G]oto [R]eferences' },
+		{ 'gI', function() Snacks.picker.lsp_implementations() end, desc = '[G]oto [I]mplementation' },
+		{ '<leader>D', function() Snacks.picker.lsp_type_definitions() end, desc = 'Type [D]efinition' },
+		{ '<leader>ds', function() Snacks.picker.lsp_symbols() end, desc = '[D]ocument [S]ymbols' },
+		{ '<leader>ws', function() Snacks.picker.lsp_workspace_symbols() end, desc = '[W]orkspace [S]ymbols' },
+		{ '<leader>rn', vim.lsp.buf.rename, desc = '[R]e[n]ame' },
+		{ '<leader>ca', vim.lsp.buf.code_action, desc = '[C]ode [A]ction', mode = { 'n', 'x' } },
+		{ 'gD', function() Snacks.picker.lsp_declarations() end, desc = '[G]oto [D]eclaration' },
+		{ 'K', vim.lsp.buf.hover, desc = 'Show hover' },
+		-- New useful Snacks LSP pickers
+		{ '<leader>lc', function() Snacks.picker.lsp_config() end, desc = '[L]SP [C]onfig' },
+		{ '<leader>li', function() Snacks.picker.lsp_incoming_calls() end, desc = '[L]SP [I]ncoming Calls' },
+		{ '<leader>lo', function() Snacks.picker.lsp_outgoing_calls() end, desc = '[L]SP [O]utgoing Calls' },
 	},
 	custom = {
 		{
@@ -363,8 +362,8 @@ local keymaps = {
 		{ '<leader>\'s',    function() Snacks.picker.notifications() end,  desc = 'Show Notification History Picker' },
 
 		{ '<leader>;h',     function() Snacks.picker.help() end,           desc = 'Show Help' },
-		{ '<leader>;r',     function() Snacks.notifier.register() end,     desc = 'Show Registers' },
-		{ '<leader>;k',     function() Snacks.notifier.keymaps() end,      desc = 'Show Keymaps' },
+		{ '<leader>;r',     function() Snacks.picker.registers() end,     desc = 'Show Registers' },
+		{ '<leader>;k',     function() Snacks.picker.keymaps() end,      desc = 'Show Keymaps' },
 		{ '<leader>;m',     function() Snacks.picker.man() end,            desc = 'Search Man Pages' },
 		{ '<leader>;u',     function() Snacks.picker.undo() end,           desc = 'Search Undo' },
 		{ '<leader>;/',     function() Snacks.picker() end,                desc = 'Search snacks pickers' },
