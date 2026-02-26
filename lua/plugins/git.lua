@@ -31,4 +31,11 @@ return {
 			},
 		},
 	},
+	{
+		'akinsho/git-conflict.nvim',
+		event = 'VeryLazy',
+		keys = Keymaps.git_conflict,
+		version = "*",
+		config = true
+	}
 }
