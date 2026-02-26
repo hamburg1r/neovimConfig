@@ -18,11 +18,6 @@ local keymaps = {
 		-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 		-- or just use <C-\><C-n> to exit terminal mode
 		{ '<Esc><Esc>',  '<C-\\><C-n>',                         desc = 'Exit terminal mode',       mode = { 't' } },
-
-		-- { "K",           vim.lsp.buf.hover,                     desc = "Show hover" },
-		-- { "gd", vim.lsp.buf.definition, desc = "Jump to definition" },
-		-- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
-
 		{ "<leader>bs",  '<cmd>write<cr>',                      desc = 'Save Buffer' },
 		{ "<leader>ba",  '<cmd>wall<cr>',                       desc = 'Save all Buffers' },
 		{ "<leader>by",  '<cmd>%y *<cr>',                       desc = 'Yank buffer to clipboard' },
@@ -32,6 +27,7 @@ local keymaps = {
 		{ "<leader>cdf", vim.diagnostic.open_float,             desc = 'Open Diagnostics in Float' },
 	},
 	lsp = {
+		--  To jump back, press <C-t>.
 		{ 'gd', function() Snacks.picker.lsp_definitions() end, desc = '[G]oto [D]efinition' },
 		{ 'gr', function() Snacks.picker.lsp_references() end, desc = '[G]oto [R]eferences' },
 		{ 'gI', function() Snacks.picker.lsp_implementations() end, desc = '[G]oto [I]mplementation' },
@@ -42,7 +38,7 @@ local keymaps = {
 		{ '<leader>ca', vim.lsp.buf.code_action, desc = '[C]ode [A]ction', mode = { 'n', 'x' } },
 		{ 'gD', function() Snacks.picker.lsp_declarations() end, desc = '[G]oto [D]eclaration' },
 		{ 'K', vim.lsp.buf.hover, desc = 'Show hover' },
-		-- New useful Snacks LSP pickers
+		{ '<leader>th',     function() Snacks.toggle.inlay_hints() end,    desc = 'Inlay Hints' },
 		{ '<leader>lc', function() Snacks.picker.lsp_config() end, desc = '[L]SP [C]onfig' },
 		{ '<leader>li', function() Snacks.picker.lsp_incoming_calls() end, desc = '[L]SP [I]ncoming Calls' },
 		{ '<leader>lo', function() Snacks.picker.lsp_outgoing_calls() end, desc = '[L]SP [O]utgoing Calls' },
@@ -203,30 +199,12 @@ local keymaps = {
 		}
 	},
 	git_conflict = {
-		{
-			'<leader>gco',
-			'<Plug>(git-conflict-ours)',
-		},
-		{
-			'<leader>gct',
-			'<Plug>(git-conflict-theirs)',
-		},
-		{
-			'<leader>gcb',
-			'<Plug>(git-conflict-both)',
-		},
-		{
-			'<leader>gc0',
-			'<Plug>(git-conflict-none)',
-		},
-		{
-			'[x',
-			'<Plug>(git-conflict-prev-conflict)',
-		},
-		{
-			']x',
-			'<Plug>(git-conflict-next-conflict)',
-		},
+		{ '<leader>gco', '<Plug>(git-conflict-ours)', },
+		{ '<leader>gct', '<Plug>(git-conflict-theirs)', },
+		{ '<leader>gcb', '<Plug>(git-conflict-both)', },
+		{ '<leader>gc0', '<Plug>(git-conflict-none)', },
+		{ '[x', '<Plug>(git-conflict-prev-conflict)', },
+		{ ']x', '<Plug>(git-conflict-next-conflict)', },
 	},
 	tiny_code_action = {
 		{
@@ -318,6 +296,9 @@ local keymaps = {
 		{ '<leader>bg',  function() Snacks.picker.lines() end,                                                desc = 'Find in Buffer' },
 		{ '<leader>bG',  function() Snacks.picker.grep_buffers() end,                                         desc = 'Find among Buffers' },
 		{ '<leader>b/',  function() Snacks.picker.buffers() end,                                              desc = 'Find Buffer' },
+		{ '<leader>bdd',    function() Snacks.bufdelete.delete() end,      desc = 'Delete current buffer' },
+		{ '<leader>bda',    function() Snacks.bufdelete.all() end,         desc = 'Delete all buffers' },
+		{ '<leader>bdo',    function() Snacks.bufdelete.other() end,        desc = 'Delete other buffers' },
 
 		{ '<leader>ff',  function() Snacks.picker.files() end,                                                desc = 'Find Files' },
 		{ '<leader>fg',  function() Snacks.picker.grep() end,                                                 desc = 'Grep in Files' },
@@ -335,13 +316,14 @@ local keymaps = {
 		{
 			'<leader>tc',
 			function()
-				Snacks.toggle.option("conceallevel",
-					{ off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+				Snacks.toggle.option("conceallevel", {
+					off = 0,
+					on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2
+				})
 			end,
 			desc = 'Conceallevel'
 		},
 		{ '<leader>tt',     function() Snacks.toggle.treesitter() end,     desc = 'Treesitter' },
-		{ '<leader>th',     function() Snacks.toggle.inlay_hints() end,    desc = 'Inlay Hints' },
 		{ '<leader>ti',     function() Snacks.toggle.indent() end,         desc = 'Indent' },
 		{ '<leader>td',     function() Snacks.toggle.dim() end,            desc = 'Dim' },
 		{ '<leader>tD',     function() Snacks.toggle.diagnostics() end,    desc = 'Diagnostics' },
@@ -369,9 +351,6 @@ local keymaps = {
 		{ '<leader>;/',     function() Snacks.picker() end,                desc = 'Search snacks pickers' },
 		{ '<leader>.o',     function() Snacks.scratch.open() end,          desc = 'Scratch buffer open' },
 		{ '<leader>.s',     function() Snacks.scratch.select() end,        desc = 'Scratch buffer select' },
-		{ '<leader>bdd',    function() Snacks.bufdelete.delete() end,      desc = 'Delete current buffer' },
-		{ '<leader>bda',    function() Snacks.bufdelete.all() end,         desc = 'Delete all buffers' },
-		{ '<leader>bdo',    function() Snacks.bufdelete.other() end,        desc = 'Delete other buffers' },
 	}
 }
 

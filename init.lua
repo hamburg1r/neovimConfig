@@ -87,7 +87,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 CUSTOM = require('custom.default')
 
 require('options')
-require('autocommands')
+require('custom.autocommands')
 
 CUSTOM.CustomFunctions.setup_keymap(CUSTOM.keymaps)
 
