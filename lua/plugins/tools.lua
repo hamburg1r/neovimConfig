@@ -123,12 +123,25 @@ return {
 			-- Document existing key chains
 			spec = {
 				{ '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
-				{ '<leader>d', group = '[D]ocument' },
+				{ '<leader>cg', group = '[G]oto' },
+				{ '<leader>cf', group = '[F]lutter' },
+				{ '<leader>cd', group = '[D]iagnostics' },
+				{ '<leader>;', group = '[P]ickers' },
+				{ '<leader>b', group = '[B]uffer' },
+				{ '<leader>f', group = '[F]ind' },
+				{ '<leader>bd', group = '[D]elete', },
+				{ '<leader>d', group = '[D]ebug' },
 				{ '<leader>r', group = '[R]ename' },
 				{ '<leader>s', group = '[S]earch' },
 				{ '<leader>w', group = '[W]orkspace' },
 				{ '<leader>t', group = '[T]oggle' },
-				{ '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+				{ '<leader>g', group = '[G]it' },
+				{ '<leader>h', group = '[H]unk', mode = { 'n', 'v' } },
+				{ '<leader>\'', group = '[N]otifications' },
+				{ '<leader>.', group = '[S]cratch' },
+				{ '<leader>B', group = '[B]reakpoint' },
+				{ '<leader>l', group = '[L]sp' },
+				{ '<leader>gc', group = '[C]onflict' },
 			},
 		},
 	},
@@ -166,15 +179,4 @@ return {
 			}
 		end
 	},
-	-- {
-	-- 	"chrisgrieser/nvim-origami",
-	-- 	event = "VeryLazy",
-	-- 	opts = {}, -- required even when using default config
-	--
-	-- 	-- recommended: disable vim's auto-folding
-	-- 	init = function()
-	-- 		vim.opt.foldlevel = 99
-	-- 		vim.opt.foldlevelstart = 99
-	-- 	end,
-	-- },
 }
