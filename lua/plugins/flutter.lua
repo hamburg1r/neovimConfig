@@ -96,8 +96,20 @@ return {
 				-- capabilities = my_custom_capabilities, -- e.g. lsp_status capabilities
 				--- OR you can specify a function to deactivate or change or control how the config is created
 				capabilities = function(config)
-					config.specificThingIDontWant = false
+					config.textDocument.foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					}
 					return config
+				end,
+				on_attach = function(client, bufnr)
+					-- Ensure nvim-ufo is set up and attached only if the client is dartls
+					if client.name == 'dartls' then
+						-- Detach first to ensure a clean state before re-attaching
+						require('ufo').detach(bufnr)
+						require('ufo').setup()
+						require('ufo').attach(bufnr)
+					end
 				end,
 				-- see the link below for details on each option:
 				-- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
@@ -107,6 +119,7 @@ return {
 					-- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
 					renameFilesWithClasses = "prompt", -- "always"
 					enableSnippets = true,
+					enableSdkFormatter = true,
 					updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
 				}
 			}

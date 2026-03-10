@@ -104,9 +104,15 @@ vim.opt.wrap = true -- use :set wrap! to disable wrap
 -- Set the commands to save in history default number is 20.;
 -- vim.opt.history = 1000;
 -- Disables fold at startup;
-vim.opt.foldenable = false;
+vim.opt.foldenable = false
 vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo.foldexpr = 'v:lua.require"ufo".get_foldtext()'
+-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
+-- nvim-ufo related folding options
+vim.o.foldcolumn = '1' -- '0' is default, '1' provides a column for folds
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
 
 vim.opt.termguicolors = true
 

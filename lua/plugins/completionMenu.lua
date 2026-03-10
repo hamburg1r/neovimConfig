@@ -4,7 +4,10 @@ return {
 		-- follow latest release.
 		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 		-- install jsregexp (optional!).
-		build = "nix shell nixpkgs#gnumake nixpkgs#gcc --command make install_jsregexp"
+		build = "nix shell nixpkgs#gnumake nixpkgs#gcc --command make install_jsregexp",
+		config = function()
+			require("luasnip").filetype_extend("javascriptreact", { "html" })
+		end,
 	},
 	{
 		'saghen/blink.cmp',
@@ -124,9 +127,6 @@ return {
 					},
 					snippets = {
 						opts = {
-							extended_filetypes = {
-								javascriptreact = { 'html' },
-							}
 						}
 					},
 

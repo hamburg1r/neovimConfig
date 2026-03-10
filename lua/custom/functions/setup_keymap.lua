@@ -20,7 +20,7 @@ local function compress(m, t)
   end
 end
 
-local function setup_keymaps(keymaps, enabled_categories)
+local function setup_keymaps(keymaps, enabled_categories, buffer)
   enabled_categories = enabled_categories or {
     'basic',
     'custom'
@@ -46,7 +46,11 @@ local function setup_keymaps(keymaps, enabled_categories)
 
     -- Set up the keymaps
     for _, key in ipairs(keys) do
-      vim.keymap.set(key[1], key[2], key[3], key[4] or {})
+      local opts = vim.tbl_deep_extend('force', {}, key[4] or {})
+      if buffer then
+        opts.buffer = buffer
+      end
+      vim.keymap.set(key[1], key[2], key[3], opts)
     end
   end
 end
