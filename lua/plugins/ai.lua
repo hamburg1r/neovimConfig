@@ -15,7 +15,20 @@ return {
 		-- this file can contain specific instructions for your project
 		instructions_file = "avante.md",
 		-- for example
-		provider = "gemini",
+		provider = "gemini-cli",
+		acp_providers = {
+			["gemini-cli"] = {
+				command = "gemini",
+				args = { "--experimental-acp" },
+				env = {
+					NODE_NO_WARNINGS = "1",
+					HOME = os.getenv("HOME"),
+					GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
+					GEMINI_DEFAULT_AUTH_TYPE = "oauth-personal",
+				},
+				auth_method = "oauth-personal",
+			},
+		},
 		providers = {
 			claude = {
 				endpoint = "https://api.anthropic.com",
@@ -83,6 +96,11 @@ return {
 				close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
 			},
 		},
+		-- windows = {
+		-- 	ask = {
+		-- 		floating = true,
+		-- 	},
+		-- },
 		selector = {
 			picker = "snacks"
 		}
@@ -115,6 +133,18 @@ return {
 					use_absolute_path = true,
 				},
 			},
+		},
+		{
+			"ravitemer/mcphub.nvim",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+			},
+			build = "bundled_build.lua",  -- Bundles `mcp-hub` binary along with the neovim plugin
+			config = function()
+				require("mcphub").setup({
+					use_bundled_binary = true,  -- Use local `mcp-hub` binary
+				})
+			end,
 		},
 		-- {
 		-- 	-- Make sure to set this up properly if you have lazy=true
